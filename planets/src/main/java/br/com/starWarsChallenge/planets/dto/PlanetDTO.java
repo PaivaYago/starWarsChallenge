@@ -1,12 +1,9 @@
 package br.com.starWarsChallenge.planets.dto;
 
-
 import java.util.List;
 import java.util.stream.Collectors;
 
 import br.com.starWarsChallenge.planets.document.Planet;
-
-
 
 public class PlanetDTO {
 
@@ -17,9 +14,9 @@ public class PlanetDTO {
 	private String terrain;
 
 	private int quantity;
-	
+
 	public PlanetDTO() {
-		
+
 	}
 
 	public PlanetDTO(Planet planet) {
@@ -27,32 +24,26 @@ public class PlanetDTO {
 		this.name = planet.getName();
 		this.climate = planet.getClimate();
 		this.terrain = planet.getTerrain();
-		
+
 	}
-	
+
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
 		return super.toString();
 	}
-	
-	
-	
 
 	public String getName() {
 		return name;
 	}
 
-
 	public String getClimate() {
 		return climate;
 	}
 
-
 	public String getTerrain() {
 		return terrain;
 	}
-
 
 	public int getQuantity() {
 		return quantity;
@@ -63,7 +54,7 @@ public class PlanetDTO {
 	}
 
 	public static Planet toEntity(PlanetDTO planetDTO) {
-		
+
 		Planet planet = new Planet();
 		planet.setName(planetDTO.getName());
 		planet.setClimate(planetDTO.getClimate());
@@ -72,14 +63,9 @@ public class PlanetDTO {
 		return planet;
 
 	}
-	
-	  public static List<PlanetDTO> toListDTO(List<Planet> planets) {
-	        return planets
-	                .stream()
-	                .map(planet -> new PlanetDTO(planet))
-	                .collect(Collectors.toList());
-	    }
-	  
-	  
+
+	public static List<PlanetDTO> toListDTO(List<Planet> planets) {
+		return planets.stream().map(planet -> new PlanetDTO(planet)).collect(Collectors.toList());
+	}
 
 }
