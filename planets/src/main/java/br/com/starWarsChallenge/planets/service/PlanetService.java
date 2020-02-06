@@ -6,7 +6,6 @@ import java.util.Optional;
 import br.com.starWarsChallenge.planets.document.Planet;
 import br.com.starWarsChallenge.planets.dto.PlanetDTO;
 
-
 public interface PlanetService {
 	
 	public Planet createPlanet(PlanetDTO planetDTO);

@@ -8,6 +8,7 @@ public class ResponseHelpful<T> {
      private String msg;
      private List<String> erros;
 
+     
      public ResponseHelpful(T dados, String msg) {
          this.dados = dados;
          this.msg = msg;

@@ -9,4 +9,5 @@ public class MessageHelpful {
     public final static String EXISTS_NAME = "Com este nome um Planeta já tem";
     public final static String SERVICE_UNAVAILABLE = "Perdemos comunicação com a base";
 
+    
 }

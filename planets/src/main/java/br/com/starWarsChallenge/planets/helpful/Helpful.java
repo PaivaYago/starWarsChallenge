@@ -14,4 +14,5 @@ public class Helpful {
 
 		 return a == null || a == "";
 	}
+	
 }

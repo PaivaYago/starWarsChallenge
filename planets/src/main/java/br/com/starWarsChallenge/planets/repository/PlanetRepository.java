@@ -6,7 +6,6 @@ import br.com.starWarsChallenge.planets.document.Planet;
 
 public interface PlanetRepository extends MongoRepository<Planet, String>{
 	
-	
 	Planet findByName(String name);
 	
 }

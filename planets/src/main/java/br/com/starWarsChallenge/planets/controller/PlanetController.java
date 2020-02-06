@@ -69,7 +69,6 @@ public class PlanetController {
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(new PlanetDTO(planet));
         		
-		
 	}
 	
 	@GetMapping(path = PathHelpful.FIND_BY_ID)
