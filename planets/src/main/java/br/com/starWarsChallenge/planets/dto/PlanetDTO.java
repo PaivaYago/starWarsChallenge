@@ -13,7 +13,7 @@ public class PlanetDTO {
 
 	private String terrain;
 
-	private int quantity;
+	private String countFilms;
 
 	public PlanetDTO() {
 
@@ -45,12 +45,12 @@ public class PlanetDTO {
 		return terrain;
 	}
 
-	public int getQuantity() {
-		return quantity;
+	public String getCountFilms() {
+		return countFilms;
 	}
 
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
+	public void setCountFilms(String countFilms) {
+		this.countFilms = countFilms;
 	}
 
 	public static Planet toEntity(PlanetDTO planetDTO) {
@@ -59,6 +59,7 @@ public class PlanetDTO {
 		planet.setName(planetDTO.getName());
 		planet.setClimate(planetDTO.getClimate());
 		planet.setTerrain(planetDTO.getTerrain());
+		planet.setCountFilms(planetDTO.getCountFilms());
 
 		return planet;
 
@@ -67,5 +68,7 @@ public class PlanetDTO {
 	public static List<PlanetDTO> toListDTO(List<Planet> planets) {
 		return planets.stream().map(planet -> new PlanetDTO(planet)).collect(Collectors.toList());
 	}
+	
+	
 
 }

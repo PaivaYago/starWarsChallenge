@@ -2,14 +2,16 @@ package br.com.starWarsChallenge.planets.controller;
 
 import java.net.URI;
 import java.util.List;
-import java.util.Optional;
+
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -34,6 +36,7 @@ public class PlanetController {
 	PlanetService service;
 	
 
+
 	@PostMapping(path = PathHelpful.INCLUDE)
 	public ResponseEntity<?> createPlanet(@Valid @RequestBody PlanetDTO planetDTO, UriComponentsBuilder uriBuilder) {
 		
@@ -46,15 +49,14 @@ public class PlanetController {
 	}
 	
 	@GetMapping(path = PathHelpful.FIND_ALL)
-	public ResponseEntity<List<PlanetDTO>> findAll(){
+	public ResponseEntity<List<Planet>> findAll(){
 		
 		List<Planet> planets = service.findAllPlanets();
-		List<PlanetDTO> dto = PlanetDTO.toListDTO(planets);
 		
 		return ResponseEntity
-				.status(!Helpful.isEmpety(dto) ? HttpStatus.OK : HttpStatus.PARTIAL_CONTENT)
+				.status(!Helpful.isEmpety(planets) ? HttpStatus.OK : HttpStatus.PARTIAL_CONTENT)
                 .contentType(MediaType.APPLICATION_JSON)
-                .body(dto);
+                .body(planets);
 		
 		
 	}
@@ -75,17 +77,17 @@ public class PlanetController {
 	@GetMapping(path = PathHelpful.FIND_BY_ID)
 	public ResponseEntity<PlanetDTO> findById(@PathVariable(name = "id")String id){
 		
-		Optional<Planet> planet = service.findById(id);
+		Planet planet = service.findById(id);
 
         return ResponseEntity.
         		status(Helpful.isEmpety(planet) ? HttpStatus.OK : HttpStatus.PARTIAL_CONTENT)
                 .contentType(MediaType.APPLICATION_JSON)
-                .body(new PlanetDTO(planet.get()));
+                .body(new PlanetDTO(planet));
 		
 	}
 	
 	
-	@GetMapping(path = PathHelpful.REMOVE)
+	@DeleteMapping(path = PathHelpful.REMOVE)
 	public ResponseEntity<?> deletePlanet(@PathVariable(name = "id") String id) {
 		
 		service.deletePlanet(id);

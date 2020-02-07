@@ -21,6 +21,8 @@ public class Planet {
 	@NotBlank(message = "{terrain.not.blank}")
 	private String terrain;
 
+	private String countFilms;
+	
 	public Planet() {
 		// TODO Auto-generated constructor stub
 	}
@@ -28,11 +30,13 @@ public class Planet {
 	
 	public Planet(@NotBlank(message = "{name.not.blank}") String name,
 			@NotBlank(message = "{climate.not.blank}") String climate,
-			@NotBlank(message = "{terrain.not.blank}") String terrain) {
+			@NotBlank(message = "{terrain.not.blank}") String terrain,
+			String countFilms) {
 		super();
 		this.name = name;
 		this.climate = climate;
 		this.terrain = terrain;
+		this.countFilms = countFilms;
 	}
 
 
@@ -77,6 +81,17 @@ public class Planet {
 	public void setTerrain(String terrain) {
 		this.terrain = terrain;
 	}
+
+
+	public String getCountFilms() {
+		return countFilms;
+	}
+
+
+	public void setCountFilms(String countFilms) {
+		this.countFilms = countFilms;
+	}
+	
 	
 	
 }
