@@ -1,15 +1,18 @@
 package br.com.starWarsChallenge.planets.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import br.com.starWarsChallenge.exception.BusinessException;
 import br.com.starWarsChallenge.planets.document.Planet;
-import br.com.starWarsChallenge.planets.dto.OutsideApiDTO;
-import br.com.starWarsChallenge.planets.dto.PlanetDTO;
-import br.com.starWarsChallenge.planets.helpful.NotFoundException;
+
+import br.com.starWarsChallenge.planets.dto.OutSideApiDTO;
+import br.com.starWarsChallenge.planets.helpful.Helpful;
+import br.com.starWarsChallenge.planets.helpful.MessageHelpful;
 import br.com.starWarsChallenge.planets.repository.PlanetRepository;
 
 @Service
@@ -24,47 +27,97 @@ public class PlanetServiceImpl implements PlanetService{
 
 	@Override
 	@Transactional(rollbackFor = Exception.class)
-	public Planet createPlanet(PlanetDTO planetDTO) {
+	public Planet createPlanet(Planet planet) throws BusinessException{
 		
-		planetDTO.setCountFilms(this.appearancesFilms(planetDTO.getName()));
+		if(exists(planet.getName(), planet.getId())){
+			
+			throw new BusinessException(MessageHelpful.EXISTS_NAME);
+			
+		}
 		
-		System.out.println(planetDTO.getCountFilms());
+		planet.setCountFilms(this.appearancesFilms(planet.getName()));
 		
-		return repository.save(PlanetDTO.toEntity(planetDTO));
+		return repository.save(planet);
 		
 	}
 
 	
 	@Override
-	public Planet findById(String id) {
-		return repository.findById(id).orElseThrow(() -> new NotFoundException());
+	public Optional<Planet> findById(String id) throws BusinessException{
+		
+		if(Helpful.isEmpety(id)) {
+			
+			throw new BusinessException(MessageHelpful.EMPTY_ID);
+			
+		}
+		
+		
+		
+		return repository.findById(id);
 	}
 
 	@Override
-	public Planet findByName(String name) {
+	public Optional<Planet> findByName(String name) throws BusinessException {
+
+		if(name.isEmpty()) {
+			
+			throw new BusinessException(MessageHelpful.EMPTY_NAME);
+			
+		}
+			
 		return repository.findByName(name);
 	}
 
 	@Override
-	public List<Planet> findAllPlanets() {
+	public List<Planet> findAllPlanets() throws BusinessException{
 		
-		return repository.findAll();
+		List<Planet> planets = repository.findAll();
+		
+		if(Helpful.isEmpety(planets)) {
+			
+			throw new BusinessException(MessageHelpful.EMPTY);
+		}
+		
+		return planets;
 	}
 
 	@Override
-	public void deletePlanet(String id) {
+	public void deletePlanet(String id) throws BusinessException{
+		
+		if(Helpful.isEmpety(id)) {
+			
+			throw new BusinessException(MessageHelpful.EMPTY_ID);
+			
+		}else if(!exists(null, id)) {
+			
+			throw new BusinessException(MessageHelpful.NOT_FOUND);
+			
+		}
+		
 		repository.deleteById(id);
 		
 	}
 	
-	public String appearancesFilms(String name) {
+	public String appearancesFilms(String name){
 		
-		OutsideApiDTO dto = outsideService.findByName(name);
+		OutSideApiDTO dto = outsideService.findByName(name);
 		
-		return Integer.toString(dto.getFilms().stream()
-                .filter(a -> dto.getName().equalsIgnoreCase(name))
-                .mapToInt(a -> dto.getFilms().size())
+		return Integer.toString(dto.getResults().stream()
+                .filter(a -> a.getName().contentEquals(name))
+                .mapToInt(a -> a.getFilms().size())
                 .sum());
+	}
+	
+	public Boolean exists(String name, String id) throws BusinessException {
+		
+		if(!Helpful.isEmpety(name) && this.findByName(name).isPresent() ||
+				!Helpful.isEmpety(id) && this.findById(id).isPresent()){
+			
+			return true;
+			
+		}
+		
+		return false;
 	}
 
 

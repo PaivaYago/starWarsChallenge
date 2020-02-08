@@ -8,7 +8,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class OutsideApiDTO implements Serializable{
+public class ResultDTO implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 

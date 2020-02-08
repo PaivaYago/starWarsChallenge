@@ -1,12 +1,12 @@
 package br.com.starWarsChallenge.planets.service;
 
 
-import br.com.starWarsChallenge.planets.dto.OutsideApiDTO;
+import br.com.starWarsChallenge.planets.dto.OutSideApiDTO;
 
 public interface OutsideApiService {
 	
 
-	OutsideApiDTO findByName(String nome);
+	<T> OutSideApiDTO findByName(String nome);
 
 
 }
