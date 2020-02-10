@@ -7,10 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import br.com.starWarsChallenge.exception.BusinessException;
 import br.com.starWarsChallenge.planets.document.Planet;
 
 import br.com.starWarsChallenge.planets.dto.OutSideApiDTO;
+import br.com.starWarsChallenge.planets.exception.BusinessException;
 import br.com.starWarsChallenge.planets.helpful.Helpful;
 import br.com.starWarsChallenge.planets.helpful.MessageHelpful;
 import br.com.starWarsChallenge.planets.repository.PlanetRepository;

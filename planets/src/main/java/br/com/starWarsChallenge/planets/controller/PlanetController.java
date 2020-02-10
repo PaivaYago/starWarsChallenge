@@ -29,8 +29,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import br.com.starWarsChallenge.exception.BusinessException;
 import br.com.starWarsChallenge.planets.document.Planet;
+import br.com.starWarsChallenge.planets.exception.BusinessException;
 import br.com.starWarsChallenge.planets.helpful.Helpful;
 import br.com.starWarsChallenge.planets.helpful.MessageHelpful;
 import br.com.starWarsChallenge.planets.helpful.PathHelpful;

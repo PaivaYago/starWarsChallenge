@@ -3,11 +3,12 @@ package br.com.starWarsChallenge.planets.service;
 import java.util.List;
 import java.util.Optional;
 
-import br.com.starWarsChallenge.exception.BusinessException;
 import br.com.starWarsChallenge.planets.document.Planet;
+import br.com.starWarsChallenge.planets.exception.BusinessException;
 
 
 public interface PlanetService {
+	
 	
 	public Planet createPlanet(Planet planet) throws BusinessException;
 	

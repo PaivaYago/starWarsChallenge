@@ -39,6 +39,16 @@ public class Planet {
 		this.countFilms = countFilms;
 	}
 
+	public Planet(String id, @NotBlank(message = "{name.not.blank}") String name,
+			@NotBlank(message = "{climate.not.blank}") String climate,
+			@NotBlank(message = "{terrain.not.blank}") String terrain, String countFilms) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.climate = climate;
+		this.terrain = terrain;
+		this.countFilms = countFilms;
+	}
 
 
 	@Override

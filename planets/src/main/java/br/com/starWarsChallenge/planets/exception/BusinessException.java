@@ -1,4 +1,4 @@
-package br.com.starWarsChallenge.exception;
+package br.com.starWarsChallenge.planets.exception;
 
 public class BusinessException extends Exception{
 
