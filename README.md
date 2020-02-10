@@ -30,4 +30,5 @@ Funcionalidades desejadas:
 - Remover planeta
 
 Linguagem utilizada: Java EE
+
 Banco utilizado: MongoDB utilizando conexão com um serviço em nuvem da mLabe
